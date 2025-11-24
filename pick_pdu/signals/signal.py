@@ -1,4 +1,4 @@
-from utils import *
+from utils.pdu_utils import Endianness, big_endian_byte_order
 
 class Signal:
 

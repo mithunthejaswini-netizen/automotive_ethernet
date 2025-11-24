@@ -1,15 +1,11 @@
-from pdu_timer import *
-from collections.abc import Sequence
-
-
-
+from pdus.pdu_cyclic_timer import *
 
 def send_udp_packet(
-    udp_pkt,
-    udp_socket,
-    interval=0,
-    loop=0
-):
+        udp_pkt,
+        udp_socket,
+        interval=0,
+        loop=0
+    ):
     
     """
     Add two numbers.
@@ -37,7 +33,6 @@ def send_udp_packet(
 
 def stop_udp_packet(*udp_pkt):
 
-
     """
     Stop one or more UDP packet transmissions.
 
@@ -50,7 +45,4 @@ def stop_udp_packet(*udp_pkt):
     """
         
     for pkt in  udp_pkt:
-        pkt.stop_timer_thread()    
-    
-
-
+        pkt.stop_timer_thread()

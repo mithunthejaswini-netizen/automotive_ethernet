@@ -149,3 +149,5 @@ def big_endian_byte_order(
         signal_total_bits -= 1
 
 a = [0x00] * 2
+
+big_endian_byte_order()

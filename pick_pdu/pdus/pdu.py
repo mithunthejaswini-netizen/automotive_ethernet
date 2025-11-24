@@ -1,4 +1,4 @@
-from signal import Signal
+from signals.signal import Signal
 
 class Pdu:
 

@@ -1,7 +1,9 @@
-from signal import Signal
-from pdu import Pdu
-from udp import *
-from pdu_socket import *
+from signals.signal import *
+from pdus.pdu_cyclic_timer import *
+from pdus.pdu import *
+from sockets.pdu_socket import *
+from sockets.udp_pdu import *
+from utils.ip_utils import *
 
 def parse_json_file():
     pass
@@ -47,7 +49,7 @@ if __name__=='__main__':
     Udp.add_protocol_data_unit(pdu2)
 
 
-    from udp_sender import *
+    from utils.udp_sender import *
     import time
 
     send_udp_packet(Udp, u_socket,  0, 0)
