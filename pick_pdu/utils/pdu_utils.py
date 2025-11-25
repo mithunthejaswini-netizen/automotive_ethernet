@@ -107,21 +107,26 @@ def big_endian_byte_order(
         network_payload,
         signal_start_bit,
         signal_total_bits,
-        signal_data
+        signal_data,
+        endianness
     ):
 
     if len(signal_data) > 1:
         signal_data = list(reversed(signal_data))
-
-    pdu_bit = signal_start_bit % 8
+    
+    if endianness==Endianness.SMALL:
+        pdu_bit = signal_start_bit % 8
+    else:
+        pdu_bit = 7 - (signal_start_bit % 8)
+    
     pdu_byte = signal_start_bit // 8
     signal_bit = 0
     signal_byte = 0
 
-    is_single_byte, _MAX_BYTE = (False, signal_total_bits)  \
-                                if signal_total_bits <=8 \
-                                else (True, 0)
-
+    is_single_byte, _MAX_BYTE = (False, 8)  \
+                                if signal_total_bits >=8 \
+                                else (True, 4)
+                                
     while signal_total_bits:
 
         if is_single_byte:
@@ -133,7 +138,10 @@ def big_endian_byte_order(
 
         if pdu_bit == 8:
             pdu_bit = 0
-            pdu_byte+= 1
+            if endianness==Endianness.SMALL:
+                pdu_byte+= 1
+            else:
+                pdu_byte-= 1
 
         is_set = BitUtils.is_bit_set(signal_data[signal_byte], signal_bit)
 
@@ -145,9 +153,4 @@ def big_endian_byte_order(
 
         signal_bit+=1
         pdu_bit+=1
-
         signal_total_bits -= 1
-
-a = [0x00] * 2
-
-big_endian_byte_order()
