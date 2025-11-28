@@ -76,6 +76,13 @@ if __name__=='__main__':
     signal_first_tract.update_signal_data(Endianness.BIG, a)
     signal_last_track.update_signal_data(Endianness.BIG, a)
     
+    pdu1 = Pdu(Endianness.BIG, 0x3285, 0x20)
+    pdu1.add_signal(signal_media_title)
+    pdu1.add_signal(signal_media_type)
+    pdu1.add_signal(signal_media_file_system)
+    pdu1.add_signal(signal_first_tract)
+    pdu1.add_signal(signal_last_track)
+    
     print([hex(value) for value in a])    
 
     signal_play = Signal('Play', 5, 6, [0x3F]) # Endianness.BIG
@@ -93,6 +100,14 @@ if __name__=='__main__':
     signal_unload.update_signal_data(Endianness.BIG, a)
     signal_search_forward.update_signal_data(Endianness.BIG, a)
     
+    pdu2 = Pdu(Endianness.BIG, 0x8932, 0x35)
+    pdu2.add_signal(signal_play)
+    pdu2.add_signal(signal_stop)
+    pdu2.add_signal(signal_pause)
+    pdu2.add_signal(signal_load)
+    pdu2.add_signal(signal_unload)
+    pdu2.add_signal(signal_search_forward)
+    
     print([hex(value) for value in a])
     
     
@@ -109,6 +124,13 @@ if __name__=='__main__':
     signal_disk_change.update_signal_data(Endianness.BIG, a)
     signal_magazine_status.update_signal_data(Endianness.BIG, a)
     
+    pdu3 = Pdu(Endianness.BIG, 0x5651, 0x15)
+    pdu3.add_signal(signal_no_magazine)
+    pdu3.add_signal(signal_magazine_loaded)
+    pdu3.add_signal(signal_disk_check)
+    pdu3.add_signal(signal_disk_change)
+    pdu3.add_signal(signal_magazine_status)
+    
     print([hex(value) for value in a])
     
     # varying values 
@@ -124,6 +146,13 @@ if __name__=='__main__':
     signal_media_file_system.update_signal_data(Endianness.BIG, a)
     signal_first_tract.update_signal_data(Endianness.BIG, a)
     signal_last_track.update_signal_data(Endianness.BIG, a)
+    
+    pdu4 = Pdu(Endianness.BIG, 0x5100, 0x21)
+    pdu4.add_signal(signal_media_title)
+    pdu4.add_signal(signal_media_type)
+    pdu4.add_signal(signal_media_file_system)
+    pdu4.add_signal(signal_first_tract)
+    pdu4.add_signal(signal_last_track)
     
     print([hex(value) for value in a])    
 
@@ -142,6 +171,14 @@ if __name__=='__main__':
     signal_unload.update_signal_data(Endianness.BIG, a)
     signal_search_forward.update_signal_data(Endianness.BIG, a)
     
+    pdu5 = Pdu(Endianness.BIG, 0x5153, 0x15)
+    pdu5.add_signal(signal_play)
+    pdu5.add_signal(signal_stop)
+    pdu5.add_signal(signal_pause)
+    pdu5.add_signal(signal_load)
+    pdu5.add_signal(signal_unload)
+    pdu5.add_signal(signal_search_forward)
+    
     print([hex(value) for value in a])
     
     
@@ -158,9 +195,16 @@ if __name__=='__main__':
     signal_disk_change.update_signal_data(Endianness.BIG, a)
     signal_magazine_status.update_signal_data(Endianness.BIG, a)
     
+    pdu6 = Pdu(Endianness.BIG, 0x1111, 0x17)
+    pdu6.add_signal(signal_no_magazine)
+    pdu6.add_signal(signal_magazine_loaded)
+    pdu6.add_signal(signal_disk_check)
+    pdu6.add_signal(signal_disk_change)
+    pdu6.add_signal(signal_magazine_status)
+    
     print([hex(value) for value in a])
     
-    print("#" * 75)
+    print("#" * 95)
         
     signal_no_disk = Signal('No_Disk', 0, 4, [0xF]) # Endianness.BIG
     signal_audio = Signal('Audio', 4, 7, [0x7F])
@@ -174,6 +218,13 @@ if __name__=='__main__':
     signal_video.update_signal_data(Endianness.SMALL, a)
     signal_rom.update_signal_data(Endianness.SMALL, a)
     signal_mixed.update_signal_data(Endianness.SMALL, a)
+    
+    pdu7 = Pdu(Endianness.SMALL, 0x1212, 0x19)
+    pdu7.add_signal(signal_no_disk)
+    pdu7.add_signal(signal_audio)
+    pdu7.add_signal(signal_video)
+    pdu7.add_signal(signal_rom)
+    pdu7.add_signal(signal_mixed)
     
     print([hex(value) for value in a])
     
@@ -190,6 +241,13 @@ if __name__=='__main__':
     signal_cd_extra.update_signal_data(Endianness.SMALL, a)
     signal_udf.update_signal_data(Endianness.SMALL, a)
     
+    pdu7 = Pdu(Endianness.SMALL, 0x1234, 0x15)
+    pdu7.add_signal(signal_bridge_disc)
+    pdu7.add_signal(signal_joliet)
+    pdu7.add_signal(signal_photo_cd)
+    pdu7.add_signal(signal_cd_extra)
+    pdu7.add_signal(signal_udf)
+    
     print([hex(value) for value in a])
     
     signal_e_motor_speed = Signal('EMotorSpeed', 0, 3, [0x7]) 
@@ -202,6 +260,12 @@ if __name__=='__main__':
     signal_e_motor_temperature.update_signal_data(Endianness.SMALL, a)
     signal_e_motor_current.update_signal_data(Endianness.SMALL, a)
     signal_e_motor_power.update_signal_data(Endianness.SMALL, a)
+    
+    pdu8 = Pdu(Endianness.SMALL, 0x1234, 0x15)
+    pdu8.add_signal(signal_e_motor_speed)
+    pdu8.add_signal(signal_e_motor_temperature)
+    pdu8.add_signal(signal_e_motor_current)
+    pdu8.add_signal(signal_e_motor_power)
     
     print([hex(value) for value in a])
     
