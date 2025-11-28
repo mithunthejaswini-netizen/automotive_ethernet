@@ -68,19 +68,16 @@ class Signal:
         :returns: "None"
         :rtype: None
     
-            """
-
-        if endian == Endianness.BIG.value:
-
-            big_endian_byte_order(
-                            
-                pdu_payload,
-                self.start_bit,
-                self.total_length_bits,
-                self._signal_data
-            )
-        else:
-            pass
+        """
+            
+        big_endian_byte_order(
+                        
+            pdu_payload,
+            self.start_bit,
+            self.total_length_bits,
+            self._signal_data,
+            endian
+        )
 
     @property
     def signal_data(self):
@@ -141,6 +138,7 @@ class Signal:
 
         :returns:
             "True" if equal, otherwise "False`"
+        
         :rtype: bool
         """
 
@@ -153,6 +151,7 @@ class Signal:
         return result
 
         # use the below version if you want to strictly compare
+        
         '''
         return  self.name == other.name and \
                 self.total_length_bits == other.total_length_bits and \
@@ -170,6 +169,7 @@ class Signal:
 
         :returns:
             Hash value for this signal.
+            
         :rtype: int
         """
 
@@ -184,7 +184,9 @@ class Signal:
 
         :returns:
             Formatted multi-line string describing the signal.
+            
         :rtype: str
         """
 
         return f'{self.name}\n\t +-- {self.start_bit=}\n\t +-- {self.total_length_bits=}\n\t +-- {self.signal_data=}\n'
+    
