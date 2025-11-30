@@ -208,7 +208,6 @@ class Pdu:
             signal_name
         ):
         
-    
         """
         Retrieve a signal by name.
 
@@ -219,7 +218,7 @@ class Pdu:
             The ``Signal`` instance, or ``None`` if not present.
         :rtype: Signal | None
         """
-        pass
+        return self.signals[signal_name]
 
     def __hash__(self):
 
@@ -288,5 +287,4 @@ class Pdu:
         :raises StopIteration:
             When iteration is exhausted.
         """
-
         return next(self._iterator)

@@ -145,7 +145,9 @@ class Signal:
         if not isinstance(other, type(self)):
             return NotImplemented
 
-        result =  self.name==other.name and \
+        result =  self.name == other.name and \
+                    self.start_bit == other.start_bit and \
+                    self.total_length_bits == other.total_length_bits and \
                     self._signal_data == other._signal_data
         
         return result
@@ -173,7 +175,7 @@ class Signal:
         :rtype: int
         """
 
-        return hash((self.name, self.start_bit, self.total_length_bits, self.signal_data))
+        return hash((self.name, self.start_bit, self.total_length_bits, self._signal_data))
 
     def __str__(self):
 
