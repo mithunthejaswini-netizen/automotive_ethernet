@@ -70,6 +70,8 @@ class Signal:
     
         """
             
+        print(pdu_payload, self.start_bit, self.total_length_bits, self._signal_data)
+        
         big_endian_byte_order(
                         
             pdu_payload,
@@ -111,19 +113,25 @@ class Signal:
         
         raise AttributeError('Signal data cannot be updated')
 
-    def reset_signal_data(self):
+    
+    def reset_signal_data(self, pdu):
 
         """
         Reset all bytes of the signal data to ``0x00``.
 
         Useful for clearing a PDU before re-encoding new signal values.
 
-        :returns: ``None``
+        :returns: 'None'
         :rtype: None
         """
 
         for index, _byte in enumerate(self._signal_data):
             self._signal_data[index] = 0x00
+            
+        self.update_signal_data(
+                        pdu.endian, 
+                        pdu.payload
+                    )
 
     def __eq__(self, other):
 

@@ -87,8 +87,7 @@ class Pdu:
         :returns: The payload as immutable bytes.
         :rtype: bytes
         """
-        print('payload', self._payload)
-        return bytes(self._payload)
+        return self._payload
 
     @payload.setter
     def payload(
@@ -134,7 +133,6 @@ class Pdu:
         if signal in self.signals.values():
             print(f'{signal.name} already exists')
         else:
-            print('coming here')
             self.signals[signal.name] = signal
             signal.update_signal_data(
                                 self.endian,
@@ -160,22 +158,12 @@ class Pdu:
         """
 
         if isinstance(signal, str):
-            self.signals[signal].reset_signal_data()
+            self.signals[signal].reset_signal_data(self)
             
         elif isinstance(signal, Signal):
-            signal.reset_signal_data()
+            signal.reset_signal_data(self)
             signal = signal.name 
-            
-        # after resetting the signal data to zeros update those values to the payload.
-        
-        self.signals[signal].\
-            update_signal_data(
-            
-            self.endian,
-            self._payload
-        
-        )
-        
+
         del self.signals[signal]
 
     def __eq__(

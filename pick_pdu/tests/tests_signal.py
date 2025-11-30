@@ -1,3 +1,5 @@
+from utils.pdu_utils import *
+
 """
 ['0xff', '0xff', '0xff', '0xff', '0xff', '0xf0', '0x0', '0x0', '0x0', '0x0']
 ['0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xf0', '0x0', '0x0']
@@ -24,6 +26,7 @@ big_endian_byte_order(a, 38, 18, [0x03, 0xFF, 0xFF], Endianness.BIG)
 big_endian_byte_order(a, 41, 3, [0x7], Endianness.BIG) 
 big_endian_byte_order(a, 43, 2, [0x03], Endianness.BIG) 
 
+print('*' * 100)
 print([hex(value) for value in a])
 
     #big_endian_3
@@ -114,13 +117,6 @@ big_endian_byte_order(a, 34, 11, [0x4, 0x08], Endianness.BIG) # value 1032
 
 print([hex(value) for value in a])
 
-
-
-
-
-----------------------------------------
-
-LITTLE EnDIAN
 
 #little endian 2
 

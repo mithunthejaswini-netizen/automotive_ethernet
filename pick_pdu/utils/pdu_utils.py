@@ -125,12 +125,12 @@ def big_endian_byte_order(
 
     is_single_byte, _MAX_BYTE = (False, 8)  \
                                 if signal_total_bits >=8 \
-                                else (True, 4)
+                                else (True, signal_total_bits)
                                 
     while signal_total_bits:
 
-        if is_single_byte:
-            _MAX_BYTE = BitUtils.byte_length(signal_data[signal_byte])
+        #if is_single_byte:
+        #    _MAX_BYTE = BitUtils.byte_length(signal_data[signal_byte])
 
         if signal_bit == _MAX_BYTE:
             signal_bit = 0

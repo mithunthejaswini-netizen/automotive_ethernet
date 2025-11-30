@@ -63,38 +63,38 @@ if __name__=='__main__':
         stop_udp_packet(Udp)
     """
 
-    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    # signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
     signal_media_type = Signal('mediaType', 20, 7, [0x7F])
-    signal_media_file_system = Signal('mediaFileSystem', 38, 18, [0x03, 0xFF, 0xFF])
-    signal_first_tract = Signal('firstTrack', 41, 3, [0x7])
-    signal_last_track = Signal('lastTrack', 43, 2, [0x03])
+    # signal_media_file_system = Signal('mediaFileSystem', 38, 18, [0x03, 0xFF, 0xFF])
+    # signal_first_tract = Signal('firstTrack', 41, 3, [0x7])
+    # signal_last_track = Signal('lastTrack', 43, 2, [0x03])
     
     a = [0] * 10
-    signal_media_title.update_signal_data(Endianness.BIG, a)
-    print('Examining one signal',[hex(value) for value in a])  
+    
+    #signal_media_title.update_signal_data(Endianness.BIG, a)
+    #print('Examining one signal',[hex(value) for value in a])  
     signal_media_type.update_signal_data(Endianness.BIG, a)
     print('Examining two signal',[hex(value) for value in a])  
 # #    signal_media_file_system.update_signal_data(Endianness.BIG, a)
 # #    signal_first_tract.update_signal_data(Endianness.BIG, a)
-    signal_last_track.update_signal_data(Endianness.BIG, a)
+    # signal_last_track.update_signal_data(Endianness.BIG, a)
     
     pdu1 = Pdu(Endianness.BIG, 0x3285, 0x20)
-    pdu1.add_signal(signal_media_title)
-    pdu1.payload
+    # pdu1.add_signal(signal_media_title)
     pdu1.add_signal(signal_media_type)
-    pdu1.payload
+    pdu1.remove_signal(signal_media_type)
 #  pdu1.add_signal(signal_media_file_system)
 #  pdu1.add_signal(signal_first_tract)
-    pdu1.add_signal(signal_last_track)
+    #pdu1.add_signal(signal_last_track)
     
     print([hex(value) for value in a])  
-    pdu1.payload
     
-    pdu1.remove_signal(signal_media_title)
-    pdu1.payload
     
-    pdu1.remove_signal(signal_last_track)
-    pdu1.payload
+    #pdu1.remove_signal(signal_media_title)
+    
+    
+    # pdu1.remove_signal(signal_last_track)
+    
 
     # signal_play = Signal('Play', 5, 6, [0x3F]) # Endianness.BIG
     # signal_stop = Signal('Stop', 16, 11, [0x7, 0xFF])
