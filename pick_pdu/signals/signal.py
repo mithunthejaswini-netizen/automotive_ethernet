@@ -175,7 +175,7 @@ class Signal:
         :rtype: int
         """
 
-        return hash((self.name, self.start_bit, self.total_length_bits, self._signal_data))
+        return hash((self.name, self.start_bit, self.total_length_bits, tuple(self._signal_data)))
 
     def __str__(self):
 

@@ -68,6 +68,7 @@ if __name__=='__main__':
     signal_media_file_system = Signal('mediaFileSystem', 38, 18, [0x03, 0xFF, 0xFF])
     signal_first_tract = Signal('firstTrack', 41, 3, [0x7])
     signal_last_track = Signal('lastTrack', 43, 2, [0x03])
+    
     a = [0] * 10
     signal_media_title.update_signal_data(Endianness.BIG, a)
     print('Examining one signal',[hex(value) for value in a])  
@@ -75,16 +76,25 @@ if __name__=='__main__':
     print('Examining two signal',[hex(value) for value in a])  
 # #    signal_media_file_system.update_signal_data(Endianness.BIG, a)
 # #    signal_first_tract.update_signal_data(Endianness.BIG, a)
-#     signal_last_track.update_signal_data(Endianness.BIG, a)
+    signal_last_track.update_signal_data(Endianness.BIG, a)
     
     pdu1 = Pdu(Endianness.BIG, 0x3285, 0x20)
     pdu1.add_signal(signal_media_title)
+    pdu1.payload
     pdu1.add_signal(signal_media_type)
+    pdu1.payload
 #  pdu1.add_signal(signal_media_file_system)
 #  pdu1.add_signal(signal_first_tract)
     pdu1.add_signal(signal_last_track)
     
     print([hex(value) for value in a])  
+    pdu1.payload
+    
+    pdu1.remove_signal(signal_media_title)
+    pdu1.payload
+    
+    pdu1.remove_signal(signal_last_track)
+    pdu1.payload
 
     # signal_play = Signal('Play', 5, 6, [0x3F]) # Endianness.BIG
     # signal_stop = Signal('Stop', 16, 11, [0x7, 0xFF])
@@ -229,20 +239,20 @@ if __name__=='__main__':
     
     # print([hex(value) for value in a])
     
-    signal_bridge_disc = Signal('BridgeDisc', 0, 5, [0x1F]) # Endianness.BIG
-    signal_joliet = Signal('Joliet', 5, 11, [0x7, 0xFF])
-    signal_photo_cd = Signal('PhotoCD', 16, 8, [0xFF])
-    signal_cd_extra = Signal('CDExtra', 24, 14, [0x3F, 0xFF])
-    signal_udf = Signal('UDF', 38, 8, [0xFF])
+    # signal_bridge_disc = Signal('BridgeDisc', 0, 5, [0x1F]) # Endianness.BIG
+    # signal_joliet = Signal('Joliet', 5, 11, [0x7, 0xFF])
+    # signal_photo_cd = Signal('PhotoCD', 16, 8, [0xFF])
+    # signal_cd_extra = Signal('CDExtra', 24, 14, [0x3F, 0xFF])
+    # signal_udf = Signal('UDF', 38, 8, [0xFF])
 
-    a = [0] * 10
-    signal_bridge_disc.update_signal_data(Endianness.SMALL, a)
-    signal_joliet.update_signal_data(Endianness.SMALL, a)
-    signal_photo_cd.update_signal_data(Endianness.SMALL, a)
-    signal_cd_extra.update_signal_data(Endianness.SMALL, a)
-    signal_udf.update_signal_data(Endianness.SMALL, a)
+    # a = [0] * 10
+    # signal_bridge_disc.update_signal_data(Endianness.SMALL, a)
+    # signal_joliet.update_signal_data(Endianness.SMALL, a)
+    # signal_photo_cd.update_signal_data(Endianness.SMALL, a)
+    # signal_cd_extra.update_signal_data(Endianness.SMALL, a)
+    # signal_udf.update_signal_data(Endianness.SMALL, a)
     
-    print('sadananda',[hex(value) for value in a])
+    # print('sadananda',[hex(value) for value in a])
     
     # pdu7 = Pdu(Endianness.SMALL, 0x1234, 0x15)
     # pdu7.add_signal(signal_bridge_disc)
@@ -317,3 +327,6 @@ if __name__=='__main__':
     # signal_frame_rate_notifier.update_signal_data(Endianness.SMALL, a)
     
     # print([hex(value) for value in a])
+    
+    
+    

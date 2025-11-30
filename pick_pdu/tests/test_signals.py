@@ -1,7 +1,6 @@
 import pytest
-from unittest.mock import patch
-from signals.signal import Signal     # <-- update module name
 
+from signals.signal import Signal
 from utils.pdu_utils import Endianness
 
 def test_initialization():

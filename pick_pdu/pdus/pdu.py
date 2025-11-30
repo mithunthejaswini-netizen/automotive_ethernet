@@ -51,7 +51,7 @@ class Pdu:
         """
         Endianness of the PDU.
 
-        :returns: ``'big'`` or ``'little'``.
+        :returns: 'big' or 'little'.
         :rtype: str
         """ 
         return self._endian
@@ -87,6 +87,7 @@ class Pdu:
         :returns: The payload as immutable bytes.
         :rtype: bytes
         """
+        print('payload', self._payload)
         return bytes(self._payload)
 
     @payload.setter
@@ -123,14 +124,17 @@ class Pdu:
             The signal object to be added.
 
         :returns:
-            The current ``Pdu`` instance (for chaining).
+            The current 'Pdu' instance (for chaining).
         :rtype: Pdu
         """
 
-
+        if not isinstance(signal, Signal):
+            raise TypeError(f'signal should be of {type(Signal)}')
+        
         if signal in self.signals.values():
             print(f'{signal.name} already exists')
         else:
+            print('coming here')
             self.signals[signal.name] = signal
             signal.update_signal_data(
                                 self.endian,
@@ -146,18 +150,33 @@ class Pdu:
 
         """
         Remove a signal from the PDU and reset its data.
+        
 
         :param signal:
-            Either the signal name (``str``) or a ``Signal`` instance.
+            Either the signal name (str) or a Signal instance.
 
-        :returns: ``None``
+        :returns: None
         :rtype: None
         """
 
-        if isinstance(str, signal):
+        if isinstance(signal, str):
             self.signals[signal].reset_signal_data()
-        elif isinstance(Signal, signal):
+            
+        elif isinstance(signal, Signal):
             signal.reset_signal_data()
+            signal = signal.name 
+            
+        # after resetting the signal data to zeros update those values to the payload.
+        
+        self.signals[signal].\
+            update_signal_data(
+            
+            self.endian,
+            self._payload
+        
+        )
+        
+        del self.signals[signal]
 
     def __eq__(
             self,
@@ -172,11 +191,28 @@ class Pdu:
         :param Pdu other:
             Another PDU instance.
 
-        :returns: ``True`` if equal, otherwise ``False``.
+        :returns: 'True' if equal, otherwise 'False'.
         :rtype: bool
         """
         
-        return self.signals == other.signals and self.pdu_id == other.pdu_id
+        return self.pdu_id==other.pdu_id and\
+                self.signals == other.signals
+
+    def __contains__(
+            self,
+            signal
+        ):
+    
+        # If a string is passed, check by name
+        if isinstance(signal, str):
+            return signal in self.signals
+    
+        # If a Signal object is passed, check by equality
+        elif isinstance(signal, Signal):
+            return signal.name in self.signals and self.signals[signal.name] == signal
+    
+        # Anything else → not contained
+        return False
 
     def __getitem__(
             self,
@@ -190,10 +226,10 @@ class Pdu:
             Name of the signal to retrieve.
 
         :returns:
-            The corresponding ``Signal`` instance.
+            The corresponding 'Signal' instance.
 
         :raises TypeError:
-            If the key is not a ``str``.
+            If the key is not a 'str'.
         """
 
         if isinstance(signal, str):
@@ -215,7 +251,7 @@ class Pdu:
             Name of the signal.
 
         :returns:
-            The ``Signal`` instance, or ``None`` if not present.
+            The 'Signal' instance, or 'None' if not present.
         :rtype: Signal | None
         """
         return self.signals[signal_name]
@@ -227,10 +263,18 @@ class Pdu:
 
         :returns:
             Hash derived from the signal dictionary.
+            
         :rtype: int
         """
+        
+        ## making the perfect has with sorted so that there shouldn't be any iota of mis-match of PDUs
+        
+        signals_tuple = tuple(sorted(
+            (sig.name, sig.start_bit, sig.total_length_bits, tuple(sig._signal_data))
+            for sig in self.signals.values()
+        ))
 
-        return hash(self.signals)
+        return hash((self.pdu_id, signals_tuple))
 
     def __str__(self):
 
@@ -241,6 +285,7 @@ class Pdu:
 
         :returns:
             Human-readable description of the PDU.
+            
         :rtype: str
         """
 
@@ -258,7 +303,9 @@ class Pdu:
         Iterate over all signals in the PDU.
 
         :returns:
-            Iterator over ``Signal`` objects.
+            
+            Iterator over `Signal` objects.
+            
         :rtype: iterator
         """         
 
