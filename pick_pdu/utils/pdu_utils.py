@@ -102,7 +102,7 @@ class BitUtils:
 
         return _MAX_BYTE
 
-def big_endian_byte_order(
+def endian_byte_order(
     
         network_payload,
         signal_start_bit,

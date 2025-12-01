@@ -96,79 +96,120 @@ def test_pdu_remove_signal_from_pdu():
     
     assert 'mediaTitle' in pdu.signals
 
-'''
 def test_pdu_eq_and_hash():
-    s1 = Signal("Speed")
-    s2 = Signal("RPM")
+    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
 
-    p1 = Pdu()
-    p2 = Pdu()
-    p1.add_signal(s1)
-    p1.add_signal(s2)
-    p2.add_signal(Signal("Speed"))
-    p2.add_signal(Signal("RPM"))
+    p1 = Pdu(Endianness.BIG, 0x3285, 20)
+    p2 = Pdu(Endianness.BIG, 0x3285, 20)
+    
+    p1.add_signal(signal_media_title)
+    p1.add_signal(signal_media_type)
+    
+    p2.add_signal(signal_media_title)
+    p2.add_signal(signal_media_type)
 
-    # Signals are the same
-    assert p1 != p2  # different _signal_data instances will fail equality unless same bytes
     # Hash test
     h1 = hash(p1)
     h2 = hash(p1)  # same object hash
     assert h1 == h2
+    assert p1==p2
 
 def test_pdu_contains():
-    sig1 = Signal("Speed")
-    sig2 = Signal("RPM")
-    pdu = Pdu()
-    pdu.add_signal(sig1)
+    
+    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
+    
+    p1 = Pdu(Endianness.BIG, 0x3285, 20)
+    p2 = Pdu(Endianness.BIG, 0x378, 20)
+    
+    p1.add_signal(signal_media_title)
+    
+    p2.add_signal(signal_media_title)
+    p2.add_signal(signal_media_type)
 
-    assert "Speed" in pdu
-    assert sig1 in pdu
-    assert "RPM" not in pdu
-    assert sig2 not in pdu
+    assert "mediaTitle" in p1
+    assert "mediaType" not in p1
+    
+    assert "mediaTitle" in p2
+    assert "mediaType" in p2
+    
+def test_pdu_contains_and_removed():
+    
+    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
+    
+    p1 = Pdu(Endianness.BIG, 0x3285, 20)
+    p2 = Pdu(Endianness.BIG, 0x378, 20)
+    
+    p1.add_signal(signal_media_title)
+    
+    p2.add_signal(signal_media_title)
+    p2.add_signal(signal_media_type)
+
+    assert "mediaTitle" in p1
+    assert "mediaType" not in p1
+    
+    assert "mediaTitle" in p2
+    assert "mediaType" in p2
+    
+    p2.remove_signal(signal_media_type)
+    
+    assert "mediaType" not in p2
 
 def test_pdu_iter_and_len():
-    sig1 = Signal("Speed")
-    sig2 = Signal("RPM")
-    pdu = Pdu()
-    pdu.add_signal(sig1).add_signal(sig2)
+    
+    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
+    
+    p1 = Pdu(Endianness.BIG, 0x3285, 20)
+    
+    p1.add_signal(signal_media_title).add_signal(signal_media_type)
 
-    assert len(pdu) == 2
-    signals_list = list(pdu)
-    assert sig1 in signals_list and sig2 in signals_list
+    assert len(p1) == 2
+    signals_list = list(p1)
+    assert signal_media_title in signals_list and signal_media_type in signals_list
 
 def test_pdu_payload_read_only():
-    pdu = Pdu()
-    sig = Signal("Speed")
-    pdu.add_signal(sig)
+    
+    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
+    
+    p1 = Pdu(Endianness.BIG, 0x3285, 20)
+    
+    p1.add_signal(signal_media_title).add_signal(signal_media_type)
 
-    payload_bytes = pdu.payload
-    assert isinstance(payload_bytes, bytes)
+    payload_bytes = p1.payload
+
+    assert isinstance(payload_bytes, list)
 
     with pytest.raises(AttributeError):
-        pdu.payload = [0] * 10
+        p1.payload = [0] * 10
 
 def test_pdu_str_contains_signal_names():
-    sig1 = Signal("Speed")
-    pdu = Pdu()
-    pdu.add_signal(sig1)
+    
+    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
+    
+    p1 = Pdu(Endianness.BIG, 0x3285, 20)
+    
+    p1.add_signal(signal_media_title).add_signal(signal_media_type)
 
-    s = str(pdu)
-    assert "Speed" in s
-    assert "pdu_id" in s
+    s = str(p1)
+    
+    assert "mediaTitle" in s
+    assert "mediaType" in s
 
 def test_add_duplicate_signal_prints(monkeypatch):
-    pdu = Pdu()
-    sig = Signal("Speed")
-    pdu.add_signal(sig)
-
+    p1 = Pdu(Endianness.BIG, 0x3285, 20)
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
+    p1.add_signal(signal_media_type)
     printed = []
-
+    
     # Capture print output
     def fake_print(msg):
         printed.append(msg)
 
     monkeypatch.setattr("builtins.print", fake_print)
-    pdu.add_signal(sig)
+    p1.add_signal(signal_media_type)
     assert any("already exists" in msg for msg in printed)
-    
-'''
