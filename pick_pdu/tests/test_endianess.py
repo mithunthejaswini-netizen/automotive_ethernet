@@ -192,4 +192,74 @@ def test_small_endian_for_max_signal_values_11():
 
 	assert payload == [0x3b, 0x3c, 0xfd, 0x8d, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0]
 
+def test_big_endian_for_single_byte_signal_values_12():
 
+	payload = [0x00] * 10
+
+	endian_byte_order(payload, 2, 3,[3], Endianness.BIG) 
+	endian_byte_order(payload, 11, 4, [10], Endianness.BIG) 
+	endian_byte_order(payload, 20, 5, [25], Endianness.BIG)
+	endian_byte_order(payload, 29, 6, [29], Endianness.BIG)
+	endian_byte_order(payload, 38, 7, [60], Endianness.BIG)
+	endian_byte_order(payload, 40, 1, [1], Endianness.BIG)
+	
+	assert payload == [0x60, 0xa0, 0xc8, 0x74, 0x78, 0x80, 0x0, 0x0, 0x0, 0x0]
+
+def test_big_endian_for_single_byte_signal_values_13():
+
+	payload = [0x00] * 10
+
+	endian_byte_order(payload, 2, 3, [5], Endianness.BIG) 
+	endian_byte_order(payload, 11, 4, [12], Endianness.BIG) 
+	endian_byte_order(payload, 16, 1, [1], Endianness.BIG)
+	endian_byte_order(payload, 29, 6, [60], Endianness.BIG)
+	endian_byte_order(payload, 36, 5, [29], Endianness.BIG)
+	
+	assert payload == [0xA0, 0xC0, 0x80, 0xF0, 0xE8, 0x00, 0x0, 0x0, 0x0, 0x0]
+
+def test_big_endian_for_single_byte_signal_values_14():
+
+	payload = [0x00] * 10
+
+	endian_byte_order(payload, 1, 2, [2], Endianness.BIG) 
+	endian_byte_order(payload, 14, 7, [120], Endianness.BIG) 
+	endian_byte_order(payload, 19, 4, [11], Endianness.BIG)
+	endian_byte_order(payload, 26, 3, [1], Endianness.BIG)
+	
+	assert payload == [0x80, 0xF0, 0xB0, 0x20, 0x00, 0x00, 0x0, 0x0, 0x0, 0x0]
+
+def test_little_endian_for_single_byte_signal_values_15():
+
+	payload = [0x00] * 10
+
+	endian_byte_order(payload, 0, 3, [3], Endianness.SMALL) 
+	endian_byte_order(payload, 8, 4, [14], Endianness.SMALL) 
+	endian_byte_order(payload, 16, 7, [20], Endianness.SMALL)
+	endian_byte_order(payload, 24, 5, [15], Endianness.SMALL)
+	endian_byte_order(payload, 32, 6, [60], Endianness.SMALL)
+	
+	assert payload == [0x3, 0xE, 0x14, 0xF, 0x3C, 0x0, 0x0, 0x0, 0x0, 0x0]
+
+def test_little_endian_for_single_byte_signal_values_16():
+
+	payload = [0x00] * 10
+
+	endian_byte_order(payload, 0, 3, [7], Endianness.SMALL) # 7
+	endian_byte_order(payload, 8, 5, [31], Endianness.SMALL) # 31
+	endian_byte_order(payload, 16, 2, [3], Endianness.SMALL) # 3
+	endian_byte_order(payload, 24, 6, [63], Endianness.SMALL) # 63
+
+	assert payload == [0x7, 0x1F, 0x3, 0x3F, 0x00, 0x0, 0x0, 0x0, 0x0, 0x0]
+
+def test_little_endian_for_single_byte_signal_values_17():
+
+	payload = [0x00] * 10
+
+	endian_byte_order(payload, 0, 3, [6], Endianness.SMALL) # 7
+	endian_byte_order(payload, 8, 5, [29], Endianness.SMALL) # 31
+	endian_byte_order(payload, 16, 4, [14], Endianness.SMALL) # 15
+	endian_byte_order(payload, 24, 5, [30], Endianness.SMALL) # 31
+	endian_byte_order(payload, 32, 6, [61], Endianness.SMALL) # 63
+
+	assert payload == [0x6, 0x1D, 0xE, 0x1E, 0x3D, 0x0, 0x0, 0x0, 0x0, 0x0]
+	
