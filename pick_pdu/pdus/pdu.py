@@ -55,6 +55,17 @@ class Pdu:
         :rtype: str
         """ 
         return self._endian
+    
+    @endian.setter
+    def endian(self, endian_type):
+    
+        """
+        Endianness of the PDU.
+
+        :returns: 'big' or 'little'.
+        :rtype: str
+        """ 
+        self._endian = endian_type
 
     @property
     def pdu_length(self):
@@ -66,6 +77,16 @@ class Pdu:
         """
             
         return self._pdu_length
+    
+    @pdu_length.setter
+    def pdu_length(self, pdu_length):
+        """
+        Total length of the PDU payload in bytes.
+
+        :returns: Length in bytes.
+        :rtype: int
+        """
+        self._pdu_length = pdu_length
 
     @property
     def pdu_id(self):
@@ -77,6 +98,17 @@ class Pdu:
         :rtype: int
         """
         return self._pdu_id
+    
+    @pdu_id.setter
+    def pdu_id(self, pdu_id):
+
+        """
+        Identifier of the PDU.
+
+        :returns: The PDU ID.
+        :rtype: int
+        """
+        self._pdu_id = pdu_id
 
     @property
     def payload(self):

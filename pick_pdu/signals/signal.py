@@ -1,4 +1,4 @@
-from utils.pdu_utils import Endianness, big_endian_byte_order
+from utils.pdu_utils import Endianness, endian_byte_order
 
 class Signal:
 
@@ -16,10 +16,10 @@ class Signal:
     def __init__(
     
             self,
-            name,
-            start_bit,
-            total_length_bits,
-            signal_data
+            name='',
+            start_bit=0,
+            total_length_bits=8,
+            signal_data=[0]
         ):
         
         """
@@ -69,10 +69,8 @@ class Signal:
         :rtype: None
     
         """
-            
-        print(pdu_payload, self.start_bit, self.total_length_bits, self._signal_data)
         
-        big_endian_byte_order(
+        endian_byte_order(
                         
             pdu_payload,
             self.start_bit,
@@ -126,7 +124,7 @@ class Signal:
         """
 
         for index, _byte in enumerate(self._signal_data):
-            self._signal_data[index] = 0x00
+            self._signal_data[index] = _byte * 0x00
             
         self.update_signal_data(
                         pdu.endian, 

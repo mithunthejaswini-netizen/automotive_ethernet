@@ -7,7 +7,6 @@ from utils.pdu_utils import Endianness
 # PDU Tests
 # -------------------------------
 
-'''
 def test_pdu_equality_and_hash():
     signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
     signal_media_type = Signal('mediaType', 20, 7, [0x7F])
@@ -69,8 +68,6 @@ def test_pdu_add_signal_to_pdu():
     assert "mediaTitle" in pdu.signals
     
     assert pdu.signals["mediaFileSystem"] == signal_media_file_system
-
-'''
 
 def test_pdu_remove_signal_from_pdu():
     

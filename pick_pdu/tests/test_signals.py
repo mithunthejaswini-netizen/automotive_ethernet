@@ -1,6 +1,7 @@
 import pytest
 
 from signals.signal import Signal
+from pdus.pdu import Pdu
 from utils.pdu_utils import Endianness
 
 def test_initialization():
@@ -18,8 +19,21 @@ def test_signal_data_read_only():
         sig.signal_data = b"\x99"
 
 def test_reset_signal_data():
+    
+    signal_media_title = Signal('mediaTitle', 13, 14, [0x3F, 0xFF]) # Endianness.BIG
+    signal_media_type = Signal('mediaType', 20, 7, [0x7F])
+    signal_media_file_system = Signal('mediaFileSystem', 38, 18, [0x03, 0xFF, 0xFF])
+    
+    pdu1 = Pdu(Endianness.BIG, 0x3285, 0x20)
+    
+    pdu1.add_signal(signal_media_title)
+    pdu1.add_signal(signal_media_type)
+    pdu1.add_signal(signal_media_file_system)
+    
     sig = Signal("RPM", 0, 16, [0x12, 0x34])
-    sig.reset_signal_data()
+    
+    sig.reset_signal_data(pdu1)
+    
     assert sig.signal_data == [0x00, 0x00]
 
 def test_update_signal_data_big_endian():
