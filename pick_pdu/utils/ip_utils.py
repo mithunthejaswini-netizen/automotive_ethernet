@@ -141,12 +141,12 @@ class ValidPort:
         """
 
         def isvalid_port(value):        
-            return (value is not None) and not (value <=0)
+            return (value is not None) and not (value <=0) and not (value>65535)
         
         if isvalid_port(value):            
             setattr(instance, self.port, value)
         else:
-            raise ValueError('Port number is not valid')
+            raise ValueError('Port number is not valid { 0 < port > 65535 }')
 
     def __get__(self, instance, owner):
         
@@ -196,3 +196,5 @@ class Port:
         """
 
         return str(self._src_port) + "::" + str(self._dst_port)
+
+

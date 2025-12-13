@@ -3,9 +3,11 @@ import time
 from collections import UserDict
 from enum import Enum
 
+class PayloadOverflowError(Exception):
+    pass
 class Endianness(Enum):
     BIG = 'big'
-    SMALL = 'small'
+    LITTLE = 'little'
 
 class PduDict(UserDict):
 
@@ -114,7 +116,7 @@ def endian_byte_order(
     if len(signal_data) > 1:
         signal_data = list(reversed(signal_data))
     
-    if endianness==Endianness.SMALL:
+    if endianness==Endianness.LITTLE:
         pdu_bit = signal_start_bit % 8
     else:
         pdu_bit = 7 - (signal_start_bit % 8)
@@ -138,7 +140,7 @@ def endian_byte_order(
 
         if pdu_bit == 8:
             pdu_bit = 0
-            if endianness==Endianness.SMALL:
+            if endianness==Endianness.LITTLE:
                 pdu_byte+= 1
             else:
                 pdu_byte-= 1

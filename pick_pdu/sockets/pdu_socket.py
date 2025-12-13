@@ -17,15 +17,12 @@ def get_udp_socket(
     """
 
     # Create UDP socket
-    udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)    
-
-    print(endpoint_port.src_port)
-    print(endpoint_port.dst_port)
+    udp_socket = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)    ## please use socket.AF_INET for ipv4
 
     # Bind to the source IP and port
     udp_socket.bind((endpoint_ip.src_ip, endpoint_port.src_port))
 
     # Connect to destination
-    udp_socket.connect((endpoint_ip.dst_ip, endpoint_port.dst_port))
+    #udp_socket.connect((endpoint_ip.dst_ip, endpoint_port.dst_port))
 
     return udp_socket

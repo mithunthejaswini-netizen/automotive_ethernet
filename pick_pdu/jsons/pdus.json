@@ -2,13 +2,13 @@
     "pkt1": {
         "source_socket": {
             "ttl": 6,
-            "address": "fe80:71bc:378:5::15",
-            "port": 88888
+            "address": "fd12:3285:378::15",
+            "port": 8888
         },
         "destination_socket": {
             "ttl": 6,
-            "address": "fe80:71bc:378:5::25",
-            "port": 99999
+            "address": "fd13:3285:378::25",
+            "port": 9999
         },
         "pdu1": {
 
@@ -124,7 +124,7 @@
                 "mediaType": {
                     "start_bit": 20 ,
                     "signal_total_bits": 7,
-                    "signal_values": [63, 255]
+                    "signal_values": [127]
                 }
             }
         },
@@ -138,7 +138,7 @@
                 "mediaFileSystem": {
                     "start_bit": 38,
                     "signal_total_bits": 18,
-                    "signal_values": [63, 255]
+                    "signal_values": [3, 255, 255]
                 }
             }
         },
@@ -152,7 +152,7 @@
                 "firstTrack": {
                     "start_bit": 41 ,
                     "signal_total_bits": 3,
-                    "signal_values": [63, 255]
+                    "signal_values": [7]
                 }
             }
         },
@@ -166,7 +166,7 @@
                 "lastTrack": {
                     "start_bit": 43 ,
                     "signal_total_bits": 2,
-                    "signal_values": [63, 255]
+                    "signal_values": [3]
                 }
             }
         }
@@ -207,12 +207,12 @@
                 "mediaType": {
                     "start_bit": 20 ,
                     "signal_total_bits": 7,
-                    "signal_values": [63, 255]
+                    "signal_values": [127]
                 },
                 "mediaFileSystem": {
                     "start_bit": 38,
                     "signal_total_bits": 18,
-                    "signal_values": [63, 255]
+                    "signal_values": [3, 255, 255]
                 }
             }
         },
@@ -226,12 +226,12 @@
                 "firstTrack": {
                     "start_bit": 41 ,
                     "signal_total_bits": 3,
-                    "signal_values": [63, 255]
+                    "signal_values": [7]
                 },
                 "lastTrack": {
                     "start_bit": 43 ,
                     "signal_total_bits": 2,
-                    "signal_values": [63, 255]
+                    "signal_values": [3]
                 }
             }
         }
@@ -264,7 +264,7 @@
         },
         "pdu2": {
             "name": "pdu2",
-            "pdu_id": 12933,
+            "pdu_id": 12934,
             "length": 20,
             "cycle_time": 0.6,
             "endianness": "big",  
@@ -278,7 +278,7 @@
         },
         "pdu3": {
             "name": "pdu3",
-            "pdu_id": 12933,
+            "pdu_id": 12935,
             "length": 20,
             "cycle_time": 0.6,
             "endianness": "big",
@@ -292,7 +292,7 @@
         },
         "pdu4": {
             "name": "pdu4",
-            "pdu_id": 12933,
+            "pdu_id": 12936,
             "length": 20,
             "cycle_time": 0.6,
             "endianness": "big",
@@ -306,7 +306,7 @@
         },
         "pdu5": {
             "name": "pdu5",
-            "pdu_id": 12933,
+            "pdu_id": 12937,
             "length": 20,
             "cycle_time": 0.6,
             "endianness": "big",
@@ -320,7 +320,7 @@
         },
         "pdu6": {
             "name": "pdu6",
-            "pdu_id": 12933,
+            "pdu_id": 12938,
             "length": 20,
             "cycle_time": 0.6,
             "endianness": "big",
@@ -952,7 +952,7 @@
             "pdu_id": 1122867,
             "length": 5,
             "cycle_time": 0.45,
-            "endianness": "small",       
+            "endianness": "little",       
             "signals": {
                 "No_Disk": {
                     "start_bit": 0,
@@ -966,7 +966,7 @@
             "pdu_id": 4478310,
             "length": 5,
             "cycle_time": 0.45,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "Audio": {
                     "start_bit": 4,
@@ -980,7 +980,7 @@
             "pdu_id": 7833753,
             "length": 5,
             "cycle_time": 0.45,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "Video": {
                     "start_bit": 11,
@@ -994,7 +994,7 @@
             "pdu_id": 10061943,
             "length": 5,
             "cycle_time": 0.45,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "ROM": {
                     "start_bit": 22,
@@ -1008,7 +1008,7 @@
             "pdu_id": 5588019,
             "length": 5,
             "cycle_time": 0.45,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "Mixed": {
                     "start_bit": 24,
@@ -1035,7 +1035,7 @@
             "pdu_id": 1056816,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",        
+            "endianness": "little",        
             "signals": {
                 "No_Disk": {
                     "start_bit": 0,
@@ -1049,7 +1049,7 @@
             "pdu_id": 4214880,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "Audio": {
                     "start_bit": 4,
@@ -1063,7 +1063,7 @@
             "pdu_id": 7438737,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "Video": {
                     "start_bit": 11,
@@ -1100,7 +1100,7 @@
             "pdu_id": 11189196,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "BridgeDisc": {
                     "start_bit": 0,
@@ -1114,7 +1114,7 @@
             "pdu_id": 12307677,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",	
+            "endianness": "little",	
             "signals": {
                 "Joliet": {
                     "start_bit": 5,
@@ -1128,7 +1128,7 @@
             "pdu_id": 14544639,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "PhotoCD": {
                     "start_bit": 16,
@@ -1142,7 +1142,7 @@
             "pdu_id": 16772829,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",   
+            "endianness": "little",   
             "signals": {
                 "CDExtra": {
                     "start_bit": 24,
@@ -1156,7 +1156,7 @@
             "pdu_id": 15654314,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "UDF": {
                     "start_bit": 38,
@@ -1184,7 +1184,7 @@
             "pdu_id": 11259375,
             "length": 10,
             "cycle_time": 0.45,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "BridgeDisc": {
                     "start_bit": 0,
@@ -1203,7 +1203,7 @@
             "pdu_id": 16702650,
             "length": 10,
             "cycle_time": 0.45,
-            "endianness": "small",           
+            "endianness": "little",           
             "signals": {
                 "PhotoCD": {
                     "start_bit": 16,
@@ -1240,7 +1240,7 @@
             "pdu_id": 13286317,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "EMotorSpeed": {
                     "start_bit": 0,
@@ -1254,7 +1254,7 @@
             "pdu_id": 12237530,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "EMotorTemperature": {
                     "start_bit": 3,
@@ -1268,7 +1268,7 @@
             "pdu_id": 12566442,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "EMotorCurrent": {
                     "start_bit": 13,
@@ -1282,7 +1282,7 @@
             "pdu_id": 14609837,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "EMotorPower": {
                     "start_bit": 23,
@@ -1309,7 +1309,7 @@
             "pdu_id": 13294765,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",       
+            "endianness": "little",       
             "signals": {
                 "EMotorSpeed": {
                     "start_bit": 0,
@@ -1328,7 +1328,7 @@
             "pdu_id": 12237498,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "EMotorCurrent": {
                     "start_bit": 13,
@@ -1359,7 +1359,7 @@
             "pdu_id": 11254478,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
 
                 "RpmCM": {
@@ -1374,7 +1374,7 @@
             "pdu_id": 14593486,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "TemperatureCM": {
                     "start_bit": 4,
@@ -1388,7 +1388,7 @@
             "pdu_id": 14342862,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "CurrentCM": {
                     "start_bit": 11,
@@ -1402,7 +1402,7 @@
             "pdu_id": 14609870,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "PowerCM": {
                     "start_bit": 22,
@@ -1416,7 +1416,7 @@
             "pdu_id": 11464142,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
         
                 "RpmUnit": {
@@ -1444,7 +1444,7 @@
             "pdu_id": 11254478,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",       
+            "endianness": "little",       
             "signals": {
 
                 "RpmCM": {
@@ -1465,7 +1465,7 @@
             "pdu_id": 14593486,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "CurrentCM": {
                     "start_bit": 11,
@@ -1504,7 +1504,7 @@
             "pdu_id": 12307677,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "LaneDetection_Sig": {
                     "start_bit": 0,
@@ -1518,7 +1518,7 @@
             "pdu_id": 12245706,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "TrafficSignDetection_Sig": {
                     "start_bit": 5,
@@ -1532,7 +1532,7 @@
             "pdu_id": 11262923,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "StartStopResponseSig": {
                     "start_bit": 16,
@@ -1546,7 +1546,7 @@
             "pdu_id": 12365020,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "FrameRate_NotifierSig": {
                     "start_bit": 24,
@@ -1560,7 +1560,7 @@
             "pdu_id": 12365018,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "FrameRate_GetterRespSig": {
                     "start_bit": 38,
@@ -1587,7 +1587,7 @@
             "pdu_id": 14474460,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "LaneDetection_Sig": {
                     "start_bit": 0,
@@ -1606,7 +1606,7 @@
             "pdu_id": 12369084,
             "length": 5,
             "cycle_time": 0.5,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "StartStopResponseSig": {
                     "start_bit": 16,
@@ -1643,7 +1643,7 @@
             "pdu_id": 11250860,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
 
                 "FrameRate_Notifier": {
@@ -1658,7 +1658,7 @@
             "pdu_id": 11254474,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "FrameRate_GetterRqst": {
                     "start_bit": 3,
@@ -1673,7 +1673,7 @@
             "pdu_id": 11251164,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",	
+            "endianness": "little",	
             "signals": {
                 "FrameRate_GetterResp": {
                     "start_bit": 13,
@@ -1688,7 +1688,7 @@
             "pdu_id": 11262666,
             "length": 5,
             "cycle_time": 1,
-            "endianness": "small",   
+            "endianness": "little",   
             "signals": {
         
                 "FrameRate_SetterRqst": {
@@ -1716,7 +1716,7 @@
             "pdu_id": 13282474,
             "length": 5,
             "cycle_time": 0.45,
-            "endianness": "small",
+            "endianness": "little",
             "signals": {
                 "FrameRate_Notifier": {
                     "start_bit": 0,
@@ -1735,7 +1735,7 @@
             "pdu_id": 11202303,
             "length": 5,
             "cycle_time": 0.45,
-            "endianness": "small",  
+            "endianness": "little",  
             "signals": {
                 "FrameRate_GetterResp": {
                     "start_bit": 13,

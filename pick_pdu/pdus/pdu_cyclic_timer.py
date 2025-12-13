@@ -6,7 +6,6 @@ def send_udp(
         udp_socket
     ):
 
-
     """
     Send a single UDP packet using the specified socket.
 

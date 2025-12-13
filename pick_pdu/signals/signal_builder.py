@@ -14,11 +14,11 @@ class SignalBuilder:
         return self
     
     def add_signal_start_bit(self):
-        self.name = self.signal_fields['start_bit']
+        self.start_bit = self.signal_fields['start_bit']
         return self
         
     def add_signal_total_bits(self):
-        self.name = self.signal_fields['signal_total_bits']
+        self.total_length_bits = self.signal_fields['signal_total_bits']
         return self
     
     def add_signal_values(self):

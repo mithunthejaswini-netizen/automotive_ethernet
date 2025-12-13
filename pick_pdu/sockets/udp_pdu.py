@@ -30,9 +30,10 @@ class UdpPdu:
         self.protocol_data_units = PduDict()
         self._port = port
         self._udp_socket = None
-        self.payload = bytearray()
+        self.MTU = 1200
+        self._payload = []
         self._timer_thread = None    
-        self.timer_count = 0           
+        self.timer_count = 0  
 
     @property
     def port(self):
@@ -105,6 +106,23 @@ class UdpPdu:
         """
 
         self._udp_socket = _socket
+
+    @property
+    def payload(self):
+        
+        self._payload.clear()
+        
+        for pdu in self.protocol_data_units.values():
+            
+            self._payload += list(pdu.pdu_id.to_bytes(4, byteorder=pdu.endian))
+            self._payload += list(pdu.pdu_length.to_bytes(4, byteorder=pdu.endian))
+            self._payload += pdu.payload
+            
+        return self._payload
+    
+    @payload.setter
+    def payload(self, value):
+        raise AttributeError('Payload should not be set {use add_protocol_data_unit method to set}')
 
     @property
     def timer_thread(self):
@@ -182,10 +200,15 @@ class UdpPdu:
         """
 
         if protocol_data_unit.pdu_id in self.protocol_data_units:
-            print('protocol_data_unit already exists')
+            print('protocol data unit already exists', 'decimal=', protocol_data_unit.pdu_id, 'hex=', hex(protocol_data_unit.pdu_id))
         else:
-            self.protocol_data_units[protocol_data_unit.pdu_id] = protocol_data_unit
-
+            self.MTU -= protocol_data_unit.pdu_length
+            
+            if self.MTU >= 0:
+                self.protocol_data_units[protocol_data_unit.pdu_id] = protocol_data_unit
+            else:
+                raise PayloadOverflowError('Payload Exceeds Max MTU(1200)')
+                
         return self
 
     def __getitem__(self, pdu):
@@ -257,8 +280,6 @@ class UdpPdu:
             if not self.timer_count and self._timer_thread:   
                 print('Transmission of UDP Frame Stopped')
                 self.timer_thread.cancel()
-        
-        print('Sadananda udp payload', self.timer_count)
 
     def __str__(self):
 
