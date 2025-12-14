@@ -1,5 +1,5 @@
 from threading import Timer
-import time
+from utils.packet_utils import *
 
 def send_udp(
         udp_packet,
@@ -16,10 +16,11 @@ def send_udp(
     
     """
 
-    print(type(udp_socket))
-
-    udp_packet.udp_payload()
-    udp_socket.send(time.strftime("%Y-%m-%d %H:%M:%S").encode())
+    udp_packet.udp_payload()    
+    
+    PacketInfo.init(udp_socket).ppkt(udp_packet)
+        
+    udp_socket.send(bytes(udp_packet.payload))
 
 class CyclicTimer(Timer):
 

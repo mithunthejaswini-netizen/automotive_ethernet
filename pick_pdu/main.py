@@ -31,8 +31,6 @@ def parse_json_file():
         ip_address = PortBuilder().src_and_dst(source_endpoint, destination_endpoint, SocketAttr.address)
         
         start_udp_packets_transmission(udp, ip_address, port)
-        
-        break
 
 def start_udp_packets_transmission(udp, ip_address, port):
     

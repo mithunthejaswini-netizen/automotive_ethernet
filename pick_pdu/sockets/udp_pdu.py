@@ -27,7 +27,7 @@ class UdpPdu:
         :rtype: None
         """
 
-        self.protocol_data_units = PduDict()
+        self._protocol_data_units = PduDict()
         self._port = port
         self._udp_socket = None
         self.MTU = 1200
@@ -112,13 +112,16 @@ class UdpPdu:
         
         self._payload.clear()
         
-        for pdu in self.protocol_data_units.values():
+        for pdu in self._protocol_data_units.values():
             
             self._payload += list(pdu.pdu_id.to_bytes(4, byteorder=pdu.endian))
             self._payload += list(pdu.pdu_length.to_bytes(4, byteorder=pdu.endian))
             self._payload += pdu.payload
             
         return self._payload
+    
+    def get_protocol_data_units(self):
+        return list(self._protocol_data_units.keys())
     
     @payload.setter
     def payload(self, value):
@@ -199,13 +202,13 @@ class UdpPdu:
         :rtype: UdpPdu
         """
 
-        if protocol_data_unit.pdu_id in self.protocol_data_units:
+        if protocol_data_unit.pdu_id in self._protocol_data_units:
             print('protocol data unit already exists', 'decimal=', protocol_data_unit.pdu_id, 'hex=', hex(protocol_data_unit.pdu_id))
         else:
             self.MTU -= protocol_data_unit.pdu_length
             
             if self.MTU >= 0:
-                self.protocol_data_units[protocol_data_unit.pdu_id] = protocol_data_unit
+                self._protocol_data_units[protocol_data_unit.pdu_id] = protocol_data_unit
             else:
                 raise PayloadOverflowError('Payload Exceeds Max MTU(1200)')
                 
@@ -223,7 +226,7 @@ class UdpPdu:
         """
 
         if isinstance(pdu, str):
-            return self.protocol_data_units[pdu]
+            return self._protocol_data_units[pdu]
         elif isinstance(pdu, slice):
             raise TypeError('__getitem__ only works for str')
         else:
@@ -241,7 +244,7 @@ class UdpPdu:
         """
 
         if isinstance(pdu_id, int):
-            return self.protocol_data_units[pdu_id]
+            return self._protocol_data_units[pdu_id]
         else:
             raise TypeError('get_pdu only works for int')
 
@@ -255,7 +258,7 @@ class UdpPdu:
         :rtype: None
         """
         
-        del self.protocol_data_units[pdu.pdu_id]
+        del self._protocol_data_units[pdu.pdu_id]
 
     def udp_payload(self):
 
@@ -292,7 +295,7 @@ class UdpPdu:
 
         total_pdu = ''
 
-        for pdu in self.protocol_data_units.values():
+        for pdu in self._protocol_data_units.values():
             total_pdu += str(pdu)
 
         return total_pdu
