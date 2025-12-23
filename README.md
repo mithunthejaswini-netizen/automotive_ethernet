@@ -200,5 +200,5 @@ This confirms portability across desktop and embedded platforms.
 
 ## Author
 
-**Mithun V**  
+**Mithun Thejaswini**  
 Automotive & Embedded Networking  
