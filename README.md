@@ -63,7 +63,7 @@ UDP
 	# you can also use signal bits with big endian as well
 ```
 
-Endianness is handled **per PDU**, not per ** signal **.
+Endianness is handled **per PDU**, not per ** signal ** but signal data is written in endianess.
 
 ---
 
